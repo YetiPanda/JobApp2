@@ -11,12 +11,14 @@ const DirectoryScreen = ({ navigation, route }) => {
   
   // Check if a status filter was passed from the navigation
   useEffect(() => {
-    if (route.params?.statusFilter) {
+    if (route.params?.statusFilter && route.params.statusFilter !== null) {
+      // Filter jobs by status
       const filtered = jobs.jobsArray.filter(
         job => job.status === route.params.statusFilter
       );
       setFilteredJobs(filtered);
     } else {
+      // Show all jobs (no filter or filter explicitly set to null)
       setFilteredJobs(jobs.jobsArray);
     }
   }, [route.params?.statusFilter, jobs.jobsArray]);
@@ -99,7 +101,7 @@ const DirectoryScreen = ({ navigation, route }) => {
     return (
       <View style={styles.emptyContainer}>
         <Text style={styles.emptyText}>
-          {route.params?.statusFilter 
+          {route.params?.statusFilter && route.params.statusFilter !== null
             ? `No jobs with status "${route.params.statusFilter}" found.` 
             : "No jobs found."}
         </Text>

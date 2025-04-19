@@ -24,6 +24,14 @@ const HomeScreen = ({ navigation }) => {
     });
   };
   
+  const handleSeeAllPress = () => {
+    // Navigate to directory with no filter
+    navigation.navigate('DirectoryNav', { 
+      screen: 'Directory',
+      params: { statusFilter: null }  // Explicitly set filter to null
+    });
+  };
+  
   // Get most recent job applications (last 3)
   const recentJobs = [...jobs.jobsArray]
     .sort((a, b) => new Date(b.dateApplied) - new Date(a.dateApplied))
@@ -119,7 +127,7 @@ const HomeScreen = ({ navigation }) => {
           
           <Pressable 
             style={styles.seeAllButton}
-            onPress={() => navigation.navigate('DirectoryNav')}
+            onPress={handleSeeAllPress}
           >
             <Text style={styles.seeAllText}>See All Jobs</Text>
           </Pressable>
