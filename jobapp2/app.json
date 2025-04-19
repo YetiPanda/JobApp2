@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "jobapp2",
+    "slug": "jobapp2",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

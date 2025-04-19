@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "JobApp",
+    "slug": "jobapp",
+    "version": "1.0.0",
+    "newArchEnabled": true,
+    "assetBundlePatterns": ["**/*"]
+  }
+}

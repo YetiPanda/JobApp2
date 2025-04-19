@@ -1,0 +1,1 @@
+export const baseUrl = "http://localhost:3001/"; // Replace with your server's IP address and port
