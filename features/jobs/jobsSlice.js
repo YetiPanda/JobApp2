@@ -1,15 +1,86 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { baseUrl } from "../../shared/baseUrl";
 
+// Sample data for development
+const sampleJobs = [
+  {
+    id: 0,
+    position: "Senior Product Manager",
+    company: "Ace Corporation LLC",
+    location: "Ashburn, Virginia, USA",
+    salary: "$50,000.00",
+    status: "ACCEPTED",
+    dateApplied: "2025-03-22",
+    interview: "N/A",
+    followUp: "N/A",
+    interest: 1,
+    notes: "Good company culture, opportunity for growth"
+  },
+  {
+    id: 1,
+    position: "Product Owner",
+    company: "Chase LLC",
+    location: "Ashburn, Virginia, USA",
+    salary: "$50,000.00",
+    status: "NEGOTIATING",
+    dateApplied: "2025-04-01",
+    interview: "N/A",
+    followUp: "N/A",
+    interest: 1,
+    notes: "Interesting role with good benefits"
+  },
+  {
+    id: 2,
+    position: "Product Manager",
+    company: "Web Triangle LLC",
+    location: "Ashburn, Virginia, USA",
+    salary: "$50,000.00",
+    status: "NEGOTIATING",
+    dateApplied: "2025-03-29",
+    interview: "N/A",
+    followUp: "N/A",
+    interest: 2,
+    notes: "Fast growing company"
+  },
+  {
+    id: 3,
+    position: "Senior Marketing Manager",
+    company: "Pentagram",
+    location: "Ashburn, Virginia, USA",
+    salary: "$50,000.00",
+    status: "APPLIED",
+    dateApplied: "2025-04-05",
+    interview: "N/A",
+    followUp: "N/A",
+    interest: 3,
+    notes: "Creative team and excellent design focus"
+  },
+  {
+    id: 4,
+    position: "Senior Product Manager",
+    company: "SolarInformatics",
+    location: "Ashburn, Virginia, USA",
+    salary: "$50,000.00",
+    status: "APPLYING",
+    dateApplied: "2025-04-10",
+    interview: "N/A",
+    followUp: "N/A",
+    interest: 2,
+    notes: "Sustainable tech company"
+  }
+];
+
+// Modified to use mockdata instead of actual network request
 export const fetchJobs = createAsyncThunk(
   "jobs/fetchJobs",
   async () => {
-    const response = await fetch(baseUrl + "jobs");
-    if (!response.ok) {
-      return Promise.reject("Unable to fetch, status: " + response.status);
-    }
-    const data = await response.json();
-    return data;
+    // Instead of making a network request, return the sample data
+    // This simulates a successful API response
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(sampleJobs);
+      }, 1000); // Simulate network delay
+    });
   }
 );
 
@@ -27,7 +98,7 @@ export const postJob = createAsyncThunk(
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(newJob);
-      }, 2000);
+      }, 1000);
     });
   }
 );
@@ -37,73 +108,7 @@ const jobsSlice = createSlice({
   initialState: { 
     isLoading: true, 
     errMess: null, 
-    jobsArray: [
-      {
-        id: 0,
-        position: "Senior Product Manager",
-        company: "Ace Corporation LLC",
-        location: "Ashburn, Virginia, USA",
-        salary: "$50,000.00",
-        status: "ACCEPTED",
-        dateApplied: "2025-03-22",
-        interview: "N/A",
-        followUp: "N/A",
-        interest: 1,
-        notes: "Good company culture, opportunity for growth"
-      },
-      {
-        id: 1,
-        position: "Product Owner",
-        company: "Chase LLC",
-        location: "Ashburn, Virginia, USA",
-        salary: "$50,000.00",
-        status: "NEGOTIATING",
-        dateApplied: "2025-04-01",
-        interview: "N/A",
-        followUp: "N/A",
-        interest: 1,
-        notes: "Interesting role with good benefits"
-      },
-      {
-        id: 2,
-        position: "Product Manager",
-        company: "Web Triangle LLC",
-        location: "Ashburn, Virginia, USA",
-        salary: "$50,000.00",
-        status: "NEGOTIATING",
-        dateApplied: "2025-03-29",
-        interview: "N/A",
-        followUp: "N/A",
-        interest: 2,
-        notes: "Fast growing company"
-      },
-      {
-        id: 3,
-        position: "Senior Marketing Manager",
-        company: "Pentagram",
-        location: "Ashburn, Virginia, USA",
-        salary: "$50,000.00",
-        status: "APPLIED",
-        dateApplied: "2025-04-05",
-        interview: "N/A",
-        followUp: "N/A",
-        interest: 3,
-        notes: "Creative team and excellent design focus"
-      },
-      {
-        id: 4,
-        position: "Senior Product Manager",
-        company: "SolarInformatics",
-        location: "Ashburn, Virginia, USA",
-        salary: "$50,000.00",
-        status: "APPLYING",
-        dateApplied: "2025-04-10",
-        interview: "N/A",
-        followUp: "N/A",
-        interest: 2,
-        notes: "Sustainable tech company"
-      }
-    ] 
+    jobsArray: [] 
   },
   reducers: {
     addJob: (state, action) => {

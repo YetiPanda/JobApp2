@@ -1,11 +1,25 @@
+import { useState, useEffect } from "react";
 import { FlatList, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { ListItem, Avatar, Badge } from "react-native-elements";
 import { useSelector } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
 import Loading from "../components/LoadingComponent";
 
-const DirectoryScreen = ({ navigation }) => {
+const DirectoryScreen = ({ navigation, route }) => {
   const jobs = useSelector((state) => state.jobs);
+  const [filteredJobs, setFilteredJobs] = useState([]);
+  
+  // Check if a status filter was passed from the navigation
+  useEffect(() => {
+    if (route.params?.statusFilter) {
+      const filtered = jobs.jobsArray.filter(
+        job => job.status === route.params.statusFilter
+      );
+      setFilteredJobs(filtered);
+    } else {
+      setFilteredJobs(jobs.jobsArray);
+    }
+  }, [route.params?.statusFilter, jobs.jobsArray]);
 
   if (jobs.isLoading) {
     return <Loading />;
@@ -80,9 +94,22 @@ const DirectoryScreen = ({ navigation }) => {
     );
   };
 
+  // Display a message if no jobs match the filter
+  if (filteredJobs.length === 0) {
+    return (
+      <View style={styles.emptyContainer}>
+        <Text style={styles.emptyText}>
+          {route.params?.statusFilter 
+            ? `No jobs with status "${route.params.statusFilter}" found.` 
+            : "No jobs found."}
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <FlatList
-      data={jobs.jobsArray}
+      data={filteredJobs}
       renderItem={renderDirectoryItem}
       keyExtractor={(item) => item.id.toString()}
       contentContainerStyle={styles.flatListContent}
@@ -175,6 +202,17 @@ const styles = StyleSheet.create({
   },
   badgeDeclined: {
     backgroundColor: '#dc3545',
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  emptyText: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#555',
   },
 });
 
