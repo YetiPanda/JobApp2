@@ -14,22 +14,26 @@ A React Native mobile application for tracking job applications through the enti
 ## Installation
 
 1. Clone the repository:
+
 ```
 git clone https://github.com/yourusername/jobapp.git
 cd jobapp
 ```
 
 2. Install dependencies:
+
 ```
 npm install
 ```
 
 3. Start the development server:
+
 ```
 npm start
 ```
 
 4. Run on your device or emulator:
+
 ```
 npm run android
 # or
@@ -48,28 +52,21 @@ npm run ios
 
 ```
 /assets          - Images and other static assets
-/components      - Reusable UI components  
-/features        - Feature-specific components and Redux slices
-/redux           - Redux store configuration
-/screens         - Main application screens
-/shared          - Shared utilities and constants
+Components:
+Redux Store for local persistent storage (...redux/store.js)
+Job Management features such as job listing, filtering, and tracking.
+Dashboard with status counts and recent applications
+Drawer navigation system (from Nucampsite mobile app)
+
+Key files:
+HomeScreen.js: Dashboard with status overview
+DirectoryScreen.js: Job listings view
+JobInfoScreen.js: Detailed job view
+AddJobScreen.js: Form for adding new jobs (manual process)
+jobsSlice.js: Job data
+favoritesSlice.js: Favorites
+
 ```
-
-## App Workflow
-
-1. Browse and search for jobs in the directory
-2. Add new job applications with detailed information
-3. Track application status through the entire process
-4. Mark favorite jobs for quick access
-5. View application statistics on the dashboard
-
-## Future Enhancements
-
-- Calendar integration for interview scheduling
-- Document storage for resumes and cover letters
-- Job search integration
-- Reminders for follow-ups
-- Advanced analytics on application success rates
 
 ## License
 
