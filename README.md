@@ -40,18 +40,7 @@ npm run android
 npm run ios
 ```
 
-## Technologies Used
-
-- React Native
-- Expo
-- Redux (Redux Toolkit)
-- React Navigation
-- React Native Elements
-
-## Project Structure
-
 ```
-/assets          - Images and other static assets
 Components:
 Redux Store for local persistent storage (...redux/store.js)
 Job Management features such as job listing, filtering, and tracking.
